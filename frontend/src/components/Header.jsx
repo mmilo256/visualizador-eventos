@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <Navbar bg='primary' data-bs-theme="dark">
             <Container>
-                <Navbar.Brand href="#home">eventApp</Navbar.Brand>
+                <Navbar.Brand className='fw-bold' href="#home">EventApp</Navbar.Brand>
             </Container>
         </Navbar>
     );

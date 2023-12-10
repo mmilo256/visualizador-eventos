@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
-import { getAllEvents } from "../api/events.api";
+import { useContext } from "react";
 import { getDateItems, sortEvents } from "../utils/utils";
 import EventCard from "./EventCard";
+import { eventsContext } from "../context/eventsContext";
 
 const EventsList = () => {
 
-    const [events, setEvents] = useState([])
-
-    //LLama a la API y guarda la respuesta en el estado events
-    useEffect(() => {
-        getAllEvents()
-            .then(data => setEvents(data));
-    }, []);
-
-    //Ordena los eventos por fecha
+    const { events } = useContext(eventsContext);
     const sortedEvents = sortEvents(events);
 
     return (
@@ -25,6 +17,7 @@ const EventsList = () => {
                         key={event.id}
                         title={event.titulo}
                         desc={event.descripcion}
+                        location={event.ubicacion}
                         date={{
                             day: getDateItems(event.fecha).day,
                             month: getDateItems(event.fecha).month,
@@ -32,7 +25,6 @@ const EventsList = () => {
                             hours: getDateItems(event.fecha).hours,
                             minutes: getDateItems(event.fecha).minutes
                         }}
-                        location={event.ubicacion}
                     />
                 ))}
             </ul>
