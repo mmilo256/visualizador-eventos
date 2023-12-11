@@ -14,7 +14,7 @@ const EventCard = (props) => {
             <Container className='mb-3'>
                 <Card>
                     <Row>
-                        <Col className='p-0' md={3} lg={2}>
+                        <Col className='p-0' md={4} lg={2}>
                             <Card.Body className='d-flex flex-column h-100 align-items-center justify-content-center bg-dark text-white'>
                                 <p className='m-0 fs-1 fw-bold'>{props.date.day}</p>
                                 <p className='m-0 fs-4 text-capitalize'>{props.date.month}</p>
@@ -22,7 +22,7 @@ const EventCard = (props) => {
                         <Col className='px-2' md={8} lg={10}>
                             <Card.Body>
                                 <div className='d-flex flex-column flex-lg-row align-items-center justify-content-lg-between border-bottom pb-3 mb-3'>
-                                    <Card.Title>
+                                    <Card.Title className='text-center'>
                                         {props.title}
                                     </Card.Title>
                                     <div className='d-flex gap-2'>

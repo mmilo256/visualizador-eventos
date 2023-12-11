@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { getAllEvents } from "../api/events.api";
+import { sortEvents } from "../utils/utils";
 
 export const eventsContext = createContext();
 
@@ -11,14 +12,15 @@ export const EventsProvider = ({ children }) => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                getAllEvents().then(res => setEvents(res));
+                const data = await getAllEvents();
+                const sortedEvents = sortEvents(data);
+                setEvents(sortedEvents)
             } catch (error) {
-                console.log(error)
+                console.log("Error")
             }
         }
-
         fetchEvents();
-    }, []);
+    }, [events]);
 
 
     return (

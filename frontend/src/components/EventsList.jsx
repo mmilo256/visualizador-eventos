@@ -1,18 +1,21 @@
 import { useContext } from "react";
-import { getDateItems, sortEvents } from "../utils/utils";
+import { getDateItems } from "../utils/utils";
 import EventCard from "./EventCard";
 import { eventsContext } from "../context/eventsContext";
 
 const EventsList = () => {
 
-    const { events } = useContext(eventsContext);
-    const sortedEvents = sortEvents(events);
+    const { events, setEvents } = useContext(eventsContext);
+
+
+
+
 
     return (
         <main className="events">
             <h2 className="my-4">Eventos registrados</h2>
             <ul className="list-unstyled">
-                {sortedEvents.map(event => (
+                {events.map(event => (
                     <EventCard
                         key={event.id}
                         title={event.titulo}
