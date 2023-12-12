@@ -39,17 +39,22 @@ const AddEventForm = () => {
     // Envío del formulario y actualiza el estado global de eventos
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newEvent = {
-            title,
-            date,
-            time,
-            location,
-            desc: descRef.current.value
+        if (new Date(date).getFullYear() <= 9999) {
+            const newEvent = {
+                title,
+                date,
+                time,
+                location,
+                desc: descRef.current.value
+            }
+            createEvent(newEvent)
+                .then(data => setEvents(data))
+            resetForm();
+            console.log("Evento agregado!")
+        } else {
+            alert("Fecha inválida")
         }
-        createEvent(newEvent)
-            .then(data => setEvents(data))
-        resetForm();
-        console.log("Tarea agregada.")
+
     };
 
 

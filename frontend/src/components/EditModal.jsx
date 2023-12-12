@@ -28,7 +28,7 @@ const EditModal = () => {
   }, [eventToEdit])
 
 
-  // Borra el evento y actualiza el estado global de eventos
+  // Modifica el evento y actualiza el estado global de eventos
   const editEvent = () => {
     const updatedEvent = {
       id: eventToEdit.id,
@@ -38,9 +38,14 @@ const EditModal = () => {
       location,
       desc
     }
-    updateEvent(updatedEvent)
-      .then(data => setEvents(data))
-    setEditModal(false)
+    if (new Date(updatedEvent.date).getFullYear() <= 9999) {
+      updateEvent(updatedEvent)
+        .then(data => setEvents(data))
+      setEditModal(false)
+    } else {
+      alert("Fecha inválida")
+    }
+
   }
 
 
