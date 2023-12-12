@@ -4,6 +4,7 @@ import EventCard from "./EventCard";
 import { eventsContext } from "../context/eventsContext";
 import { getAllEvents } from "../api/events.api";
 import RemoveModal from "./RemoveModal";
+import EditModal from "./editModal";
 
 const EventsList = () => {
 
@@ -33,6 +34,7 @@ const EventsList = () => {
                         date={{
                             day: getDateItems(event.fecha).day,
                             month: getDateItems(event.fecha).month,
+                            monthShort: getDateItems(event.fecha).monthShort,
                             year: getDateItems(event.fecha).year,
                             hours: getDateItems(event.fecha).hours,
                             minutes: getDateItems(event.fecha).minutes
@@ -41,6 +43,7 @@ const EventsList = () => {
                 ))}
             </ul>
             <RemoveModal />
+            <EditModal />
         </main>
     );
 }

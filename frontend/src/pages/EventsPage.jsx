@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import AddEventForm from "../components/AddEventForm";
 import { RemoveProvider } from "../context/removeContext";
+import { EditProvider } from "../context/editContext";
 
 
 const EventsPage = () => {
@@ -16,7 +17,9 @@ const EventsPage = () => {
                 </Col>
                 <Col md={12} lg={9}>
                     <RemoveProvider>
-                        <EventsList />
+                        <EditProvider>
+                            <EventsList />
+                        </EditProvider>
                     </RemoveProvider>
                 </Col>
             </Row>

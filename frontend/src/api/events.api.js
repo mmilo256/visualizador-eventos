@@ -35,6 +35,30 @@ export const deleteEvent = async (id) => {
         })
 }
 
+// Actualizar un evento
+export const updateEvent = async (event) => {
+    const updatedEvent = {
+        titulo: event.title,
+        descripcion: event.desc,
+        fecha: `${event.date}T${event.time}:00Z`,
+        ubicacion: event.location
+    }
+    console.log(updatedEvent)
+    await fetch(`http://localhost:8000/api/eventos/${event.id}/`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedEvent)
+    })
+    return fetch(`http://localhost:8000/api/eventos/`)
+        .then(res => res.json())
+        .then(events => {
+            const sortedEvents = sortEvents(events);
+            return sortedEvents;
+        })
+}
+
 
 // Agregar un nuevo evento
 export const createEvent = async (event) => {

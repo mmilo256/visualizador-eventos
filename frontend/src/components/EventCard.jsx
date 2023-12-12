@@ -6,11 +6,15 @@ import Col from 'react-bootstrap/Col';
 import { FaCalendarDay, FaLocationDot } from "react-icons/fa6";
 import { useContext } from 'react';
 import { removeContext } from '../context/removeContext';
+import { editContext } from '../context/editContext';
 
 const EventCard = (props) => {
 
   // Estados del modal de eliminación de evento
   const { setRemoveModal, eventToRemove, setEventToRemove } = useContext(removeContext);
+
+
+  const { setEditModal, eventToEdit, setEventToEdit } = useContext(editContext);
 
   // Fecha completa
   const fullDate = `${props.date.day} de ${props.date.month} del ${props.date.year} a las ${props.date.hours}:${props.date.minutes} hrs.`;
@@ -20,6 +24,21 @@ const EventCard = (props) => {
   const openRemoveModal = () => {
     setEventToRemove({ ...eventToRemove, id: props.id, title: props.title })
     setRemoveModal(true)
+  }
+
+
+  const openEditModal = () => {
+
+    setEventToEdit({
+      ...eventToEdit,
+      id: props.id,
+      title: props.title,
+      date: `${props.date.year}-${props.date.monthShort}-${props.date.day}`,
+      time: `${props.date.hours}:${props.date.minutes}`,
+      location: props.location,
+      desc: props.desc
+    })
+    setEditModal(true)
   }
 
   return (
@@ -40,7 +59,7 @@ const EventCard = (props) => {
                       {props.title}
                     </Card.Title>
                     <div className='d-flex gap-2'>
-                      <Button variant="warning">Editar</Button>
+                      <Button onClick={openEditModal} variant="warning">Editar</Button>
                       <Button onClick={openRemoveModal} variant="danger">Eliminar</Button>
                     </div>
                   </div>
