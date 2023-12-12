@@ -1,3 +1,5 @@
+import { sortEvents } from "../utils/utils";
+
 // Llama a la API REST y devuelve los eventos en json
 export const getAllEvents = async () => {
     return fetch('http://localhost:8000/api/eventos/')
@@ -7,23 +9,52 @@ export const getAllEvents = async () => {
             }
             return res.json();
         })
+        .then(events => {
+            const sortedEvents = sortEvents(events);
+            return sortedEvents;
+        })
         .catch(error => {
             console.error("Error al llamar a la API.", error);
         });
 }
 
-export const createEvent = (event) => {
+
+// Eliminar un evento
+export const deleteEvent = async (id) => {
+    await fetch(`http://localhost:8000/api/eventos/${id}/`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    return fetch(`http://localhost:8000/api/eventos/`)
+        .then(res => res.json())
+        .then(events => {
+            const sortedEvents = sortEvents(events);
+            return sortedEvents;
+        })
+}
+
+
+// Agregar un nuevo evento
+export const createEvent = async (event) => {
     const newEvent = {
         titulo: event.title,
         descripcion: event.desc,
         fecha: `${event.date}T${event.time}:00Z`,
         ubicacion: event.location
     }
-    fetch('http://localhost:8000/api/eventos/', {
+    await fetch('http://localhost:8000/api/eventos/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(newEvent)
     })
+    return fetch(`http://localhost:8000/api/eventos/`)
+        .then(res => res.json())
+        .then(events => {
+            const sortedEvents = sortEvents(events);
+            return sortedEvents;
+        })
 }
