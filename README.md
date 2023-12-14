@@ -1,5 +1,7 @@
 # eventApp: Visualizador de eventos
 La aplicación web eventApp permite a los usuarios registrar y visualizar eventos a través de una interfaz web. El backend está construido con Django, proporcionando una API REST, y la interfaz de usuario se hizo con React (Vite).
+
+Demo de la App en YouTube: https://www.youtube.com/watch?v=utM0b_Tz4NM&ab_channel=EmilioSotoAndrade
 ## Requisitos
 
  - Python 3.6+ 
